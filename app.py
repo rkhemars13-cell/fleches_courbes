@@ -32,17 +32,24 @@ with onglet1:
     # Bouton de validation
     valider1 = st.button("Valider le mécanisme 1")
     
-    # Graphique de la réaction
+   # -----------------------------------------------------------------
+    # GRAPHIQUE DE LA RÉACTION (CORRIGÉ POUR LE PLACEMENT DES DOUBLETS)
+    # -----------------------------------------------------------------
     fig1, ax1 = plt.subplots(figsize=(8, 4))
     ax1.set_xlim(-2, 10)
     ax1.set_ylim(-3, 3)
     ax1.axis('off')
     
-    # Dessin de HO-
-    ax1.text(0, 0, r"$\mathbf{HO^-}$", fontsize=16, color='blue', ha='center', va='center')
-    ax1.text(0.3, 0.5, "••\n••", fontsize=10, color='blue', ha='center') # Doublets
+    # Dessin de HO- (L'atome d'Oxygène est centré en (0,0))
+    ax1.text(0, 0, r"$\mathbf{O}$", fontsize=16, color='blue', ha='center', va='center')
+    ax1.text(-0.5, 0, r"$\mathbf{H}$", fontsize=16, color='blue', ha='center', va='center')
+    ax1.text(0.3, 0.3, r"$^-$", fontsize=14, color='blue', ha='center', va='center') # Charge moins
     
-    # Signe +
+    # Positionnement géométrique rigoureux des doublets non liants
+    ax1.text(0, 0.5, "••", fontsize=12, color='blue', ha='center', va='center')  # Doublet du DESSUS
+    ax1.text(0, -0.5, "••", fontsize=12, color='blue', ha='center', va='center') # Doublet du DESSOUS
+    
+    # Signe + de la réaction
     ax1.text(2, 0, "+", fontsize=16, ha='center', va='center')
     
     # Dessin de CH3Br
@@ -60,13 +67,11 @@ with onglet1:
     ax1.text(6.3, 0, r"$\mathbf{Br}$", fontsize=16, color='darkgreen', ha='center', va='center')
     ax1.text(6.3, -0.4, r"$\delta-$", fontsize=10, color='blue', ha='center')
     
-    # Tracé dynamique de la flèche si l'élève fait un choix
+    # Ajustement de la trajectoire de la flèche courbe pour partir proprement du doublet du dessus
     if donneur1 == "Doublet non liant de l'Oxygène (O-)" and accepteur1 == "Atome de Carbone (δ+)":
-        # Flèche courbe correcte
-        arrow = patches.FancyArrowPatch((0.2, 0.2), (3.8, 0), connectionstyle="arc3,rad=-0.4",
+        arrow = patches.FancyArrowPatch((0.1, 0.5), (3.8, 0.1), connectionstyle="arc3,rad=-0.3",
                                         arrowstyle="->", mutation_scale=15, color='red', linewidth=2.5, linestyle='-')
-        ax1.add_patch(arrow)
-        
+        ax1.add_patch(arrow)        
     st.pyplot(fig1)
     
     # Correction pédagogique
